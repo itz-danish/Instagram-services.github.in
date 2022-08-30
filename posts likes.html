@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>instagram services</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+  .btn_div{
+    text-align: center;
+  }
+.pay_btn{
+  width: 50%;
+  height: 35px;
+  font-size: 20px;
+}
+
+input{
+  font-size: 17px;
+  width: 95%;
+  height: 35px;
+  margin-top: 2px;
+}
+.finish_button{
+  width: 50%;
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.next_button{
+  width: 30%;
+  height: 35px;
+  font-size: 18px;
+  text-align: center;
+  
+}
+.background{
+  background-color: rgba(0,0,0,0.838);
+  color: rgba(255,255,255,0.66);
+  padding: 8px;
+  border-radius: 10px;
+}
+.offers{
+  border: solid grey;
+  padding: 5px;
+  border-radius: 2px;
+  background-color: #4c4c4c;
+}
+#offer{
+  width: 100%;
+  font-size: 100%;
+}
+label{
+  font-size: 120%;
+  color: white;
+}
+#finish_form{
+  display: none;
+}
+#pay{
+  display: none;
+}
+.end{
+  border: solid black;
+  background-color: rgba(0,0,0,0.838);
+  color: rgba(255,255,255,0.66);
+}
+.end > a{
+  text-decoration-color: rgba(255,255,255,0.585);
+  color: rgba(255,255,255,0.800);
+}
+h4{
+  text-align-last: center;
+}
+.payment_img{
+  max-width:90%;
+  height:auto;
+  display: none;
+  margin: 15px;
+  }
+  </style>
+  </head>
+  <body>
+    <div id="title">
+      <h1>Posts likes(Drop)</h1>
+      </div>
+      <div class="background">
+        <h3>Instagram Likes</h3>
+        <p>These Posts likes will drop by 0-5% over time.</p>
+        
+        <div class="offers">
+        <form action="javascript:offer_submit()">
+          <label for="offer">Choose the offer</label>
+          <br>
+          <select name="offer" id="offer" onchange="offer_submit()">
+            <option value="1kPostsLikes">1k Posts likes- 20 Rs</option>
+            <option value="2kPostsLikes">2k Posts likes- 35 Rs</option>
+            <option value="3kPostsLikes">3k Posts likes- 50 Rs</option>
+            <option value="4kPostsLikes">4k Posts likes- 60 Rs</option>
+            <option value="5kPostsLikes">5k Posts likes- 75 Rs</option>
+            <option value="11kPostsLikes">11k Posts likes- 150 Rs</option>
+            </select>
+  <br>
+    <button class='next_button' type="submit">Next</button>
+</form>
+        </div>
+        <img id="payment_img" class="payment_img" src="/image/payment.jpeg" />
+        <br>
+        <button id="pay" class="pay_btn" onclick="pay()">Pay Now</button>
+        <br>
+        
+        <div id="finish_form">
+        <form action="javascript:sendmail()" method="post">
+              <div class="field">
+                <input type="text" class="form-control" name="Name" id="Name" placeholder="Link" required="">
+              </div>
+              <div class="field">
+              <div class="field">
+                <input type="text" class="form-control" name="Subject" id="Subject" placeholder="UPI transaction id"
+                  required="">
+              </div>
+                <input type="email,phone" class="form-control" name="Sender" id="Sender" placeholder="Email or phone (Optional)">
+              </div>
+
+              <button type="submit" class="finish_button">Submit Purchase</button>
+
+            </form>
+      </div>
+      
+      </div>
+     
+     <br><br>
+     <div class="end">
+  <p>For help related to purchase contract us</p>
+  <a href="https://instagram.com/neutrino__seller?igshid=YmMyMTA2M2Y=">Instagram :-  @neutrino__seller</a>
+  <p>email :- neutrino.seller98@gmail.com</p>
+  <p>
+  phone :- +91 8409369114
+  </p>
+</div>
+    
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+    
+    <script>
+    function pay(){
+      var amount='';
+      switch (value){
+        case '1kPostsLikes':
+          amount='20'
+          break;
+        case '2kPostsLikes':
+          amount='35'
+          break;
+        case '3kPostsLikes':
+          amount='50'
+          break;
+        case '4kPostsLikes':
+          amount='60'
+          break;
+        case '5kPostsLikes':
+          amount='75'
+          break;
+        case '11kPostsLikes':
+          amount='150'
+          break;
+      }
+      
+      var link='https://upayi.ml/983512.fam@idfcbank/'+amount;
+      //window.open(link, '_blank');
+      document.getElementById("finish_form").style.display= "block";
+      document.getElementById("payment_img").style.display= "block";
+      document.getElementById('offer').disabled = true;
+    }
+    
+    var value='';
+      function offer_submit(){
+        var select = document.getElementById('offer');
+        value = select.options[select.selectedIndex].value;
+        document.getElementById("pay").style.display= "block";
+      }
+      
+    function sendmail(){
+    
+			var name = $('#Name').val();
+			var email = $('#Sender').val();
+			var subject = $('#Subject').val();
+			var message = value;
+
+			// var body = $('#body').val()
+
+			var Body='Link:- '+name+'<br>Email: '+email+'<br>Transaction id:- '+subject+'<br>Purchase: '+message;
+			//console.log(name, phone, email, messag;
+
+			Email.send({
+        SecureToken:"64a4156e-f626-4949-b234-4e520775e8aa",
+				To: 'coc983512@gmail.com',
+				From: "hakur9835@gmail.com",
+				Subject: "Instagram services buy of :- "+message,
+				Body: Body
+			}).then(
+				message =>{
+					//console.log (message);
+					if(message=='OK'){
+					alert('Your purchase is been Submitted. You will get your requested service with in 24 hours. Thanks you for purchase');
+					}
+					else{
+						console.error (message);
+						alert('Some errors occurred while making purchase. If the payment amount is deducted from your account please kindly contact us by email , phone or DM our instagram id')
+						
+					}
+				}
+			);
+		}
+      
+    </script>
+    </body>
+    </html>
